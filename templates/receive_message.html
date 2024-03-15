@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block head %}
+{%endblock%}
+{% block title %}Receiving{% endblock  %}
+{% block content %}
+    <button hx-get="/receive-message" hx-target="#messages" hx-swap="outerHTML">Refresh</button>
+    <div id="messages">
+        <!-- Messages will be displayed here -->
+    </div>
+{% endblock  %}

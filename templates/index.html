@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+<title>{% block title %}Landing Page{% endblock title %}</title>
+{% block content %}
+    <h1>Message from RabbitMQ:</h1>
+    {% if message %}
+        <p>{{ message }}</p>
+        {% else %}
+        <p>No message received</p>
+    {% endif %}
+{% endblock %}
