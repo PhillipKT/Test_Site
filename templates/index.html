@@ -1,7 +1,18 @@
 {% extends "base.html" %}
 <title>{% block title %}Landing Page{% endblock title %}</title>
 {% block content %}
-    <h1>Message from RabbitMQ:</h1>
+    <h1>Home</h1>
+    <section id="container">
+        <div>
+            <img src="{{url_for('static', filename='images/home.jpg')}}" alt="An impressive large building" id="home_photo">
+        </div>
+        <div>
+            <img src="{{url_for('static', filename='images/team.jpg')}}" alt="A team of workers" id="team_photo">
+        </div>
+        <div>
+            <img src="{{url_for('static', filename='images/home.jpg')}}" alt="An impressive large building" id="home_photo">
+        </div>
+    </section>
     {% if message %}
         <p>{{ message }}</p>
         {% else %}

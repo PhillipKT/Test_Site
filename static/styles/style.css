@@ -1,0 +1,35 @@
+h1 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.navbar.navbar-default .navbar-text {
+    justify-content: center;
+    color: #ae46ae;
+}
+
+img {
+    max-height: 70%;
+    max-width: 70%;
+    object-fit:fill;
+}
+
+#container {
+    width: 90%;
+    /* height: 500px; */
+    margin: 0 auto;
+    border: 5px solid #003049;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* flex-wrap: wrap; */
+}
+
+#container div {
+    width: 200px;
+    height: 200px;
+    max-width: 300px;
+    /* max-width: 300px; */
+    text-align:center;
+    /* target size for initial display */
+    flex-basis: 200px;
+}

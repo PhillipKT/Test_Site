@@ -17,11 +17,11 @@ for SSH_USERNAME in "${!SERVICE_USERS[@]}"; do
     for SERVICE_NAME in $SERVICES; do
         echo "Checking service status of $SERVICE_NAME for user $SSH_USERNAME..."
         #Iterate through map for services of current user
-        if ssh "$SSH_USERNAME@your_remote_server" systemctl is-active --quiet "$SERVICE_NAME"; then
+        if ssh "$SSH_USERNAME@your_remote_server" sudo systemctl is-active --quiet "$SERVICE_NAME"; then
             echo "Service $SERVICE_NAME is already running."
         else
             echo "Service $SERVICE_NAME is not running. Starting it..."
-            ssh "$SSH_USERNAME@your_remote_server" "sudo systemctl start $SERVICE_NAME"
+            ssh "$SSH_USERNAME@your_remote_server" sudo systemctl start "$SERVICE_NAME"
         fi
 
     done

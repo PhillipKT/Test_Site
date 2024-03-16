@@ -13,19 +13,21 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 class Users(db.Model):
-    id = db.Column(db.Integer, primary_key=True, index=True)
+    id = db.Column("id", db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     email = db.Column(db.String(50))
 
-app.app_context().push()
-db.create_all()
+    def __init__(self, name, email) -> None:
+        super().__init__()
+        self.name = name
+        self.email = email
 
+app.app_context().push()
 
 # RabbitMQ connection parameters
 rabbitmq_host = 'localhost'
 rabbitmq_port = 5672
 rabbitmq_queue = 'hello'
-
 
 def send_message_to_rabbitmq(message):
     connection = BlockingConnection(ConnectionParameters(rabbitmq_host))
@@ -55,7 +57,7 @@ def receive_message():
         channel.basic_ack(delivery_tag=method_frame.delivery_tag)
         return render_template('receive_message.html', messages=messages)
     else:
-        redirect(url_for("home"))
+       return redirect(url_for("home"))
     
 
 @app.route('/')
@@ -68,21 +70,28 @@ def view():
     return render_template("view.html", values=Users.query.all())
 
 
+# @app.route("/delete", methods=['POST'])
+# def delete():
+#     found_user = Users.query.filter_by(name=user).delete()
+#     for user in found_user:
+#         user.delete()
+#     return redirect("home")
+
+
+
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == "POST":
         session.permanent = True
-        email = request.form["email"]
         user = request.form["nm"]
         session ["user"] = user
 
         #query database for existing users
         found_user = Users.query.filter_by(name=user).first()
-
         if found_user:
             session["email"] = found_user.email
         else:
-            usr = Users()
+            usr = Users(user, "")
             db.session.add(usr)
             db.session.commit()
 
@@ -105,13 +114,14 @@ def user():
         if request.method == "POST":
             email = request.form["email"]
             session["email"] = email
-            found_user = db.query.filter_by(name=user).first()
+            found_user = Users.query.filter_by(name=user).first()
             found_user.email = email
             db.session.commit()
             flash("Email was saved.")
         else:
             if "email" in session:
                 email = session["email"]
+                flash(f"Welcome Back!")                
 
         return render_template("user.html", email=email)
     else:
@@ -123,9 +133,13 @@ def user():
 
 @app.route("/logout")
 def logout():
-    flash(f"You have been logged out!")
+    if "user" in session:
+        user = session["user"]
+        flash(f"You have been logged out!")
     session.pop("user", None)
     session.pop("email", None)
+    return redirect(url_for("login"))
+
 
 if __name__ == "__main__":
     db.create_all()
