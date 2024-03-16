@@ -1,14 +1,16 @@
-from flask import Blueprint, render_template, session, request, redirect
-from flask import current_app as app
+from flask import (Blueprint, render_template,
+                    session, request, redirect, flash, url_for)
+from ..extensions import db
+from ..models import Users
 
 #Blueprint Config
 user_bp = Blueprint(
-    'home_bp', __name__,
+    'user_bp', __name__,
     template_folder='templates',
     static_folder='static'
 )
 
-@app.route('/user', methods=["POST", "GET"])
+@user_bp.route('/user', methods=["POST", "GET"])
 def user():
     email = None
     if "user" in session:
@@ -29,12 +31,12 @@ def user():
         return render_template("user.html", email=email)
     else:
         flash(f"You are not logged in.")
-        return redirect(url_for("login"))
+        return redirect(url_for("home.login"))
     
     # message = receive_message()
     # return render_template('index.html', message=message)
 
-@app.route("/logout")
+@user_bp.route("/logout")
 def logout():
     if "user" in session:
         user = session["user"]

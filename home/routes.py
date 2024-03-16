@@ -1,5 +1,7 @@
-from flask import Blueprint, render_template, session, request, redirect
-from flask import current_app as app
+from ..extensions import (Blueprint, render_template, 
+                   session, request, redirect, flash, url_for)
+from extensions import db
+from models import Users
 
 #Blueprint Config
 home_bp = Blueprint(
@@ -8,12 +10,12 @@ home_bp = Blueprint(
     static_folder='static'
 )
 
-@app.route('/')
+@home_bp.route('/')
 def home():
     return render_template("index.html")
 
 
-@app.route('/login', methods=['POST', 'GET'])
+@home_bp.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == "POST":
         session.permanent = True

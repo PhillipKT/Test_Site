@@ -18,7 +18,7 @@
 <body>
     {# bootstrap nav #}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="\">InternConnect</a>
+        <a class="navbar-brand" href="{{url_for('home_bp.home')}}">InternConnect</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -30,7 +30,7 @@
                     <a class="nav-link" href="/"> <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/send-message">Send</a>
+                    <a class="nav-link" href="admin/send-message">Send</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -38,8 +38,8 @@
                         User Account
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/login">Login</a>
-                        <a class="dropdown-item" href="/receive-message">Inbox</a>
+                        <a class="dropdown-item" href="home/login">Login</a>
+                        <a class="dropdown-item" href="admin/receive-message">Inbox</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/logout">Logout</a>
                     </div>
