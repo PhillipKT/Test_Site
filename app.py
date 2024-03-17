@@ -1,6 +1,9 @@
+"""Script to run flask object"""
 
+from website import create_app
 
-# app.app_context().push()
+#Create the Flask app instance
+app = create_app()
 
-# if __name__ == "__main__":
-#     db.create_all()
+if __name__ == "__main__":
+    app.run(debug=True)
