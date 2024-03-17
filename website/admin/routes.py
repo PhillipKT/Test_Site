@@ -27,11 +27,7 @@ def send_message_to_rabbitmq(message):
 
 @admin_bp.route("/")
 def home():
-    return render_template("admin.html")
-
-@admin_bp.route("/test")
-def test():
-    return "<h1>Test</h1>"
+    return "<p>Admin Home</p>"
 
 
 @admin_bp.route("/view")
@@ -64,8 +60,9 @@ def receive_message():
        return redirect(url_for("home"))
     
 @admin_bp.route("/delete", methods=['POST'])
-def delete(user):
+def delete():
+    """Deletes all users in database"""
     found_user = Users.query.filter_by(name=user).delete()
     for user in found_user:
         user.delete()
-    return redirect("home")
+    return redirect(url_for("home"))

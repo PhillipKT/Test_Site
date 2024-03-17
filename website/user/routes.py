@@ -10,37 +10,39 @@ user_bp = Blueprint(
     static_folder='static'
 )
 
-@user_bp.route('/user', methods=["POST", "GET"])
-def user():
-    email = None
-    if "user" in session:
-        user = session["user"]
-        
-        if request.method == "POST":
-            email = request.form["email"]
-            session["email"] = email
-            found_user = Users.query.filter_by(name=user).first()
-            found_user.email = email
-            db.session.commit()
-            flash("Email was saved.")
-        else:
-            if "email" in session:
-                email = session["email"]
-                flash(f"Welcome Back!")                
 
-        return render_template("user.html", email=email)
+@user_bp.route('/login', methods=['POST', 'GET'])
+def login():
+    """Takes form data saves it into a session and redirects to user page"""
+    if request.method == "POST":
+        session.permanent = True
+        user = request.form["nm"]
+        session ["user"] = user
+
+        #query database for existing users
+        found_user = Users.query.filter_by(name=user).first()
+        if found_user:
+            session["email"] = found_user.email
+        else:
+            usr = Users(user, "")
+            db.session.add(usr)
+            db.session.commit()
+
+        flash(f"Login Successful!")
+        return redirect(url_for("user"))
     else:
-        flash(f"You are not logged in.")
-        return redirect(url_for("home.login"))
-    
-    # message = receive_message()
-    # return render_template('index.html', message=message)
+        if "user" in session:
+            flash("Already Logged In!")
+            return redirect(url_for("user"))
+     
+    return render_template("user_acc.html")
+
 
 @user_bp.route("/logout")
 def logout():
-    if "user" in session:
-        user = session["user"]
-        flash(f"You have been logged out!")
-    session.pop("user", None)
-    session.pop("email", None)
-    return redirect(url_for("login"))
+    return "<p>Log Out</p>"
+
+
+@user_bp.route("/sign-up")
+def sign_up():
+    return "<p>Sign Up</p>"
