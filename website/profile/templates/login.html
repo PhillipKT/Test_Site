@@ -9,12 +9,19 @@
         {% else %}
         {% endif %}
     {% endwith %}
-    <h2>Login</h2>
-    <div>
-        <form action="#" method="POST">
-            <label for="username">Name:</label><br>
-            <input type="text" name="nm" placeholder="Enter your name" id="username"><br>
-            <div><input type="submit" value="submit"></div>
+    <h1 align="center">Login</h1>
+    <div align="center">
+        <form>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="john@doe.com">
+            <div id="email_hint" class="form-text"></div>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 
