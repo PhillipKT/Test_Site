@@ -35,7 +35,7 @@ def login():
             flash("Already Logged In!")
             return redirect(url_for("user"))
      
-    return render_template("user_acc.html")
+    return render_template("login.html")
 
 
 @user_bp.route("/logout")
@@ -46,3 +46,8 @@ def logout():
 @user_bp.route("/sign-up")
 def sign_up():
     return "<p>Sign Up</p>"
+
+
+@user_bp.route("/account")
+def account():
+    return "<p>My Account</p>"
