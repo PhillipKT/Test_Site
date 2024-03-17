@@ -43,9 +43,9 @@ def logout():
     return "<p>Log Out</p>"
 
 
-@profile_bp.route("/")
+@profile_bp.route("/signup")
 def sign_up():
-    return "<p>Sign Up</p>"
+    return render_template("sign_up.html")
 
 
 @profile_bp.route("/account")

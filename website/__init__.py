@@ -26,6 +26,6 @@ def create_app():
     #Register Blueprints
     app.register_blueprint(home_bp, url_prefix='/')
     app.register_blueprint(admin_bp, url_prefix='/admin')
-    app.register_blueprint(profile_bp, url_prefix='/profile')
+    app.register_blueprint(profile_bp,url_prefix='/user')
     
     return app 

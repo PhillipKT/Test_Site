@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     {# custom style sheet #}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='static/styles.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css')}}">
     <title>{% block title %}Test Site{% endblock title %}</title>
 </head>
 {% endblock  %}
@@ -30,7 +30,7 @@
                     <a class="nav-link" href="/"> <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="profile/">SignUp</a>
+                    <a class="nav-link" href="{{ url_for('profile_bp.sign_up')}}">SignUp</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -38,10 +38,10 @@
                         User Account
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="home/login">Login</a>
-                        <a class="dropdown-item" href="profile/account">My Account</a>
+                        <a class="dropdown-item" href="{{ url_for('profile_bp.login') }}">Login</a>
+                        <a class="dropdown-item" href="{{ url_for('profile_bp.account') }}">My Account</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="profile/logout">Logout</a>
+                        <a class="dropdown-item" href="{{ url_for('profile_bp.logout') }}">Logout</a>
                     </div>
                 </li>
             </ul>
