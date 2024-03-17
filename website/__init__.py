@@ -21,11 +21,11 @@ def create_app():
     #Import the parts of the application
     from .home.routes import home_bp
     from .admin.routes import admin_bp
-    from .user.routes import user_bp
+    from .profile.routes import profile_bp
 
     #Register Blueprints
     app.register_blueprint(home_bp, url_prefix='/')
     app.register_blueprint(admin_bp, url_prefix='/admin')
-    app.register_blueprint(user_bp, url_prefix='/user')
+    app.register_blueprint(profile_bp, url_prefix='/profile')
     
     return app 

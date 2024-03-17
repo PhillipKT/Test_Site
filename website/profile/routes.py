@@ -4,14 +4,14 @@ from ..extensions import db
 from ..models import Users
 
 #Blueprint Config
-user_bp = Blueprint(
-    'user_bp', __name__,
+profile_bp = Blueprint(
+    'profile_bp', __name__,
     template_folder='templates',
     static_folder='static'
 )
 
 
-@user_bp.route('/login', methods=['POST', 'GET'])
+@profile_bp.route('/login', methods=['POST', 'GET'])
 def login():
     """Takes form data saves it into a session and redirects to user page"""
     if request.method == "POST":
@@ -33,21 +33,21 @@ def login():
     else:
         if "user" in session:
             flash("Already Logged In!")
-            return redirect(url_for("user"))
+            return redirect(url_for("account"))
      
     return render_template("login.html")
 
 
-@user_bp.route("/logout")
+@profile_bp.route("/logout")
 def logout():
     return "<p>Log Out</p>"
 
 
-@user_bp.route("/sign-up")
+@profile_bp.route("/")
 def sign_up():
     return "<p>Sign Up</p>"
 
 
-@user_bp.route("/account")
+@profile_bp.route("/account")
 def account():
     return "<p>My Account</p>"
